@@ -1,0 +1,22 @@
+.whatsapp-fab {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-hover);
+    z-index: 9997;
+    transition: transform 0.2s ease;
+}
+.whatsapp-fab:hover { transform: scale(1.08); }
+.whatsapp-fab svg { width: 26px; height: 26px; fill: #fff; }
+
+@media (max-width: 480px) {
+    .whatsapp-fab { right: 16px; bottom: 84px; width: 48px; height: 48px; }
+    .whatsapp-fab svg { width: 24px; height: 24px; }
+}

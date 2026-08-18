@@ -1,0 +1,71 @@
+BISMILLAH MOBILE & LAPTOP SHOP — DEMONSTRATION SCRIPT
+Target length: 5-7 minutes
+
+1. INTRODUCTION (15 sec)
+   "This is Bismillah Mobile & Laptop Shop — a full-stack PHP/MySQL e-commerce
+   platform for a local electronics business, with an AI shopping assistant,
+   real authentication, and a fully custom design system."
+
+2. HOMEPAGE (40 sec)
+   - Show hero, trust strip, auto-sliding shop photo
+   - Scroll through Featured Products (point out category badges, star ratings,
+     image slider with zoom)
+   - Show "On Sale Now" section if any product has a discount
+   - Show Popular Services and stats band
+
+3. PRODUCTS PAGE (45 sec)
+   - Search for a product by name
+   - Use the sort dropdown (Price Low to High)
+   - Set a min/max price range
+   - Click a category filter, show it combines with the other filters
+   - Click into a product
+
+4. PRODUCT DETAILS (45 sec)
+   - Show breadcrumb trail
+   - Click the main photo to open the zoom lightbox, click again to zoom in
+   - Scroll to reviews, show existing reviews, submit a new one
+   - Scroll to "You Might Also Like"
+   - Click "Chat on WhatsApp" to show the pre-filled message
+
+5. AI SHOPPING ASSISTANT (30 sec)
+   - Click the chat bubble
+   - Ask "What laptops do you have under Rs. 150,000?"
+   - Ask something off-topic to show it stays on-topic
+
+6. CONTACT FORM (20 sec)
+   - Submit a message, show validation on an empty field
+   - Show the success message
+
+7. ADMIN LOGIN & SECURITY (30 sec)
+   - Show an invalid login being rejected
+   - Log in successfully
+   - Briefly mention: Forgot Password sends a real email, and 5 failed
+     attempts locks the account for 15 minutes
+
+8. ADMIN DASHBOARD (30 sec)
+   - Show the 5 color-coded stat cards
+   - Show the Low Stock Warning (if any) and the two charts
+   - Show Recent Products / Recent Messages widgets
+
+9. PRODUCT MANAGEMENT (45 sec)
+   - Add a product with a main photo + 2 extra photos
+   - Show it appears with slider on the public site
+   - Edit it, set a sale price, show the discount badge appears
+   - Show the QR code (if built) or skip if not
+   - Delete it, show the confirmation
+
+10. REVIEWS & MESSAGES (20 sec)
+    - Approve a pending review
+    - Open a message, show it switches from Unread to Read
+
+11. MY PROFILE (15 sec)
+    - Show the password change form with show/hide toggle
+
+12. DATABASE (20 sec)
+    - Open phpMyAdmin, show the full table list
+    - Point out the products -> categories foreign key relationship
+
+13. WRAP-UP (10 sec)
+    "That covers the public storefront, the AI assistant, full CRUD with
+    multi-photo uploads, real email-based authentication, and a complete
+    admin analytics dashboard — all built, tested, and secured end-to-end."
