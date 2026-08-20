@@ -80,7 +80,7 @@ A complete web platform giving the shop:
 
 - URL: `http://localhost/bismillah-shop/admin/login.php`
 - Email: `admin@bismillahshop.com`
-- Password: `admin123`
+- Password: `admin@123`
 
 *(Change this password via the Profile page before any real deployment.)*
 

@@ -1,11 +1,13 @@
 .img-slider {
     position: relative;
     width: 100%;
+    min-width: 0;
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     background: var(--bg-light);
 }
+
 .img-slider-track {
     display: flex;
     transition: transform 0.35s ease;

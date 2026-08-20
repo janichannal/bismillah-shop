@@ -270,3 +270,49 @@ footer a:hover { color: #fff; }
     .filter-row { flex-direction: column; align-items: stretch; }
     .filter-price-input { width: 100%; }
 }
+/* ---------- Responsive two-column layouts ---------- */
+.split-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+.split-contact {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 40px;
+    align-items: stretch;
+}
+.split-intro {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: center;
+}
+.split-equal > *, .split-contact > *, .split-intro > * {
+    min-width: 0;
+}
+@media (max-width: 768px) {
+    .split-equal, .split-contact, .split-intro {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+/* ---------- CTA button groups - stack full-width on small phones
+   so they don't collide with the floating WhatsApp/chat buttons ---------- */
+.cta-button-group { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 480px) {
+    .cta-button-group { flex-direction: column; }
+    .cta-button-group .btn { width: 100%; text-align: center; }
+}
+/* Admin Login button  style only */
+.navbar ul li a[href="/bismillah-shop/admin/login.php"] {
+    color: var(--primary) !important;
+}
+
+.navbar ul li a[href="/bismillah-shop/admin/login.php"]:hover,
+.navbar ul li a[href="/bismillah-shop/admin/login.php"]:focus,
+.navbar ul li a[href="/bismillah-shop/admin/login.php"]:active {
+    color: #fff !important;
+}

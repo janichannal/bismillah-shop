@@ -99,7 +99,7 @@ require 'includes/header.php';
             ['label' => $product['product_name']],
         ]); ?>
 
-        <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+               <div class="split-equal">
 
             <div class="img-slider">
                 <div class="img-slider-track">
@@ -153,10 +153,11 @@ require 'includes/header.php';
                     <?php echo nl2br(htmlspecialchars($product['description'])); ?>
                 </p>
 
+                <div class="cta-button-group">
                 <a href="contact.php?subject=<?php echo urlencode('Product Enquiry: ' . $product['product_name']); ?>&message=<?php echo urlencode('Hi, I am interested in the ' . $product['product_name'] . ' (Rs. ' . number_format($product['price']) . '). Please provide more information.'); ?>" class="btn btn-primary">Enquire About This Product</a>
                 <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=<?php echo urlencode('Hi, I am interested in the ' . $product['product_name'] . ' (Rs. ' . number_format($product['price']) . '). Please provide more information.'); ?>" target="_blank" rel="noopener" class="btn" style="background:#25D366; color:#fff;">Chat on WhatsApp</a>
                 <a href="products.php" class="btn btn-outline">Back to Products</a>
-            </div>
+                </div>
         </div>
 
         <div style="max-width:800px; margin: 60px auto 0;">

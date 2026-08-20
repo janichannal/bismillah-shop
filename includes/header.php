@@ -43,11 +43,12 @@ $waLink = 'https://wa.me/' . WHATSAPP_NUMBER . '?text=' . urlencode($waMessage);
         </a>
         <ul>
             <li><a href="/bismillah-shop/index.php">Home</a></li>
+            <li><a href="/bismillah-shop/about.php">About</a></li>
             <li><a href="/bismillah-shop/products.php">Products</a></li>
             <li><a href="/bismillah-shop/services.php">Services</a></li>
             <li><a href="/bismillah-shop/gallery.php">Gallery</a></li>
-            <li><a href="/bismillah-shop/about.php">About</a></li>
             <li><a href="/bismillah-shop/contact.php">Contact</a></li>
+            <li><a href="/bismillah-shop/admin/login.php" class="btn btn-outline" style="padding:8px 18px; font-size:13px;">Admin Login</a></li>
         </ul>
         <button class="nav-toggle">&#9776;</button>
     </div>

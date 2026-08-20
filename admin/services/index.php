@@ -18,6 +18,7 @@ require '../includes/admin-header.php';
 <?php if (isset($_GET['updated'])): ?><div class="alert alert-success">Service updated successfully.</div><?php endif; ?>
 <?php if (isset($_GET['deleted'])): ?><div class="alert alert-success">Service deleted successfully.</div><?php endif; ?>
 
+<div class="desktop-table-only">
 <div class="table-responsive">
 <table class="admin-table">
     <tr><th>Image</th><th>Name</th><th>Description</th><th>Photos</th><th>Price</th><th>Actions</th></tr>
@@ -35,6 +36,30 @@ require '../includes/admin-header.php';
     </tr>
     <?php endforeach; ?>
 </table>
+</div>
+</div>
+
+<div class="mobile-list-only">
+<div class="recent-card">
+    <?php if (count($services) === 0): ?><div class="empty-row">No services yet.</div><?php endif; ?>
+    <?php foreach ($services as $s): ?>
+    <div class="recent-list-item wrap-actions">
+        <img src="/bismillah-shop/uploads/services/<?php echo htmlspecialchars($s['image']); ?>" class="recent-thumb">
+        <div class="recent-content">
+            <div class="recent-title"><?php echo htmlspecialchars($s['service_name']); ?></div>
+            <div class="recent-subtitle"><?php echo htmlspecialchars(substr($s['description'], 0, 40)); ?>...</div>
+        </div>
+        <div class="recent-meta">
+            <div class="recent-value">Rs. <?php echo number_format($s['price']); ?></div>
+            <span class="category-badge" style="background:var(--primary-light); color:var(--primary-dark); font-size:11px;"><?php echo (int)$s['photo_count'] + 1; ?> photos</span>
+        </div>
+        <div class="mobile-item-actions">
+            <a href="edit.php?id=<?php echo $s['service_id']; ?>">Edit</a>
+            <a href="delete.php?id=<?php echo $s['service_id']; ?>" onclick="return confirm('Delete this service?');" class="danger-link">Delete</a>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
 </div>
 
 <?php require '../includes/admin-footer.php'; ?>

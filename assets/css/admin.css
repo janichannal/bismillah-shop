@@ -232,3 +232,25 @@
 .stock-low { background: #fee2e2; color: var(--danger); }
 
 .empty-row { padding: 24px 18px; text-align: center; color: var(--text-muted); font-size: 14px; }
+
+/* ---------- Desktop table vs Mobile card-list toggle ---------- */
+.desktop-table-only { display: block; }
+.mobile-list-only { display: none; }
+@media (max-width: 768px) {
+    .desktop-table-only { display: none; }
+    .mobile-list-only { display: block; }
+}
+
+.recent-list-item.wrap-actions { flex-wrap: wrap; }
+.mobile-item-actions {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 600;
+}
+.mobile-item-actions a { color: var(--primary); }
+.mobile-item-actions a.danger-link { color: var(--danger); }

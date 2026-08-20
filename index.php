@@ -4,12 +4,24 @@ $pageDescription = 'Genuine mobile phones, laptops, tablets, and expert repair s
 require 'config/database.php';
 require 'includes/functions.php';
 
+// Featured products
 $stmt = $pdo->query("SELECT p.*, c.category_name FROM products p 
                       JOIN categories c ON p.category_id = c.category_id 
                       ORDER BY p.created_at DESC LIMIT 4");
 $featuredProducts = $stmt->fetchAll();
 
-// Products currently on sale, for the homepage "On Sale Now" section
+$featuredIds = array_column($featuredProducts, 'product_id');
+$extraByProduct = [];
+if (count($featuredIds) > 0) {
+    $placeholders = implode(',', array_fill(0, count($featuredIds), '?'));
+    $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id IN ($placeholders) ORDER BY sort_order ASC, image_id ASC");
+    $stmt->execute($featuredIds);
+    foreach ($stmt->fetchAll() as $img) {
+        $extraByProduct[$img['product_id']][] = $img;
+    }
+}
+
+// Sale products
 $saleProducts = $pdo->query("SELECT p.*, c.category_name FROM products p 
                               JOIN categories c ON p.category_id = c.category_id 
                               WHERE p.sale_price IS NOT NULL AND p.sale_price > 0 AND p.sale_price < p.price 
@@ -26,17 +38,7 @@ if (count($saleIds) > 0) {
     }
 }
 
-$featuredIds = array_column($featuredProducts, 'product_id');
-$extraByProduct = [];
-if (count($featuredIds) > 0) {
-    $placeholders = implode(',', array_fill(0, count($featuredIds), '?'));
-    $stmt = $pdo->prepare("SELECT * FROM product_images WHERE product_id IN ($placeholders) ORDER BY sort_order ASC, image_id ASC");
-    $stmt->execute($featuredIds);
-    foreach ($stmt->fetchAll() as $img) {
-        $extraByProduct[$img['product_id']][] = $img;
-    }
-}
-
+// Services
 $stmt = $pdo->query("SELECT * FROM services ORDER BY created_at DESC LIMIT 3");
 $services = $stmt->fetchAll();
 
@@ -51,6 +53,7 @@ if (count($serviceIds) > 0) {
     }
 }
 
+// Gallery preview (Our Shop section)
 $stmt = $pdo->query("SELECT * FROM gallery ORDER BY created_at DESC LIMIT 3");
 $galleryImages = $stmt->fetchAll();
 
@@ -65,6 +68,7 @@ if (count($galleryPreviewIds) > 0) {
     }
 }
 
+// Intro section auto-sliding photo (last 5 gallery uploads)
 $introImages = $pdo->query("SELECT image FROM gallery ORDER BY created_at DESC LIMIT 5")->fetchAll();
 
 require 'includes/header.php';
@@ -88,7 +92,7 @@ require 'includes/header.php';
 
 <section class="section">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 1.1fr 0.9fr; align-items:center; gap: 50px;">
+        <div class="split-intro">
             <div>
                 <span class="category-badge" style="background:var(--primary-light); color:var(--primary-dark);">Who we are</span>
                 <h2 style="margin:14px 0 16px; font-size:30px;">Genuine tech, honest repairs, real people</h2>
@@ -100,6 +104,7 @@ require 'includes/header.php';
                 </p>
                 <a href="about.php" class="btn btn-outline" style="margin-top:20px;">Read Our Story</a>
             </div>
+
             <?php if (count($introImages) > 0): ?>
             <div class="img-slider" data-autoplay="4000" style="box-shadow: var(--shadow-hover); aspect-ratio: 4/3;">
                 <div class="img-slider-track">
@@ -144,7 +149,7 @@ require 'includes/header.php';
                     <span class="category-badge" style="background:<?php echo $catColor['bg']; ?>; color:<?php echo $catColor['text']; ?>;"><?php echo htmlspecialchars($product['category_name']); ?></span>
                     <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
                     <p style="color: var(--text-muted); font-size: 14px;"><?php echo htmlspecialchars($product['brand']); ?></p>
-                 <?php echo renderProductPrice($product['price'], $product['sale_price']); ?>
+                    <?php echo renderProductPrice($product['price'], $product['sale_price']); ?>
                     <a href="product-details.php?id=<?php echo $product['product_id']; ?>" class="btn btn-outline">View Details</a>
                 </div>
             </div>

@@ -62,7 +62,7 @@ require 'includes/header.php';
             ['label' => $service['service_name']],
         ]); ?>
 
-        <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: start;">
+               <div class="split-equal">
 
             <div class="img-slider">
                 <div class="img-slider-track">
@@ -86,9 +86,11 @@ require 'includes/header.php';
                     <?php echo nl2br(htmlspecialchars($service['description'])); ?>
                 </p>
 
+                               <div class="cta-button-group">
                 <a href="contact.php?subject=<?php echo urlencode('Service Booking: ' . $service['service_name']); ?>&message=<?php echo urlencode('Hi, I would like to book the ' . $service['service_name'] . ' service (Starting Rs. ' . number_format($service['price']) . '). Please let me know the next steps.'); ?>" class="btn btn-primary">Book This Service</a>
                 <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=<?php echo urlencode('Hi, I would like to book the ' . $service['service_name'] . ' service (Starting Rs. ' . number_format($service['price']) . '). Please let me know the next steps.'); ?>" target="_blank" rel="noopener" class="btn" style="background:#25D366; color:#fff;">Chat on WhatsApp</a>
                 <a href="services.php" class="btn btn-outline">Back to Services</a>
+                </div>
             </div>
         </div>
 

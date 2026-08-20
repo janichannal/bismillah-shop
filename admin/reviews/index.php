@@ -13,6 +13,7 @@ require '../includes/admin-header.php';
 <?php if (isset($_GET['approved'])): ?><div class="alert alert-success">Review approved and now visible to customers.</div><?php endif; ?>
 <?php if (isset($_GET['deleted'])): ?><div class="alert alert-success">Review deleted.</div><?php endif; ?>
 
+<div class="desktop-table-only">
 <div class="table-responsive">
 <table class="admin-table">
     <tr><th></th><th>Product</th><th>Customer</th><th>Rating</th><th>Review</th><th>Status</th><th>Actions</th></tr>
@@ -42,6 +43,35 @@ require '../includes/admin-header.php';
     <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">No reviews yet.</td></tr>
     <?php endif; ?>
 </table>
+</div>
+</div>
+
+<div class="mobile-list-only">
+<div class="recent-card">
+    <?php if (count($reviews) === 0): ?><div class="empty-row">No reviews yet.</div><?php endif; ?>
+    <?php foreach ($reviews as $r): ?>
+    <div class="recent-list-item wrap-actions">
+        <div class="avatar-circle" style="background:#db2777;"><?php echo strtoupper(substr($r['customer_name'], 0, 1)); ?></div>
+        <div class="recent-content">
+            <div class="recent-title"><?php echo htmlspecialchars($r['product_name']); ?></div>
+            <div class="recent-subtitle"><?php echo htmlspecialchars($r['customer_name']); ?> · <span style="color:var(--accent-dark);"><?php echo str_repeat('&#9733;', $r['rating']); ?></span></div>
+        </div>
+        <div class="recent-meta">
+            <?php if ($r['status'] === 'pending'): ?>
+                <span class="category-badge" style="background:var(--accent-light); color:var(--accent-dark); font-size:11px;">Pending</span>
+            <?php else: ?>
+                <span class="category-badge" style="background:#dbeafe; color:var(--success); font-size:11px;">Approved</span>
+            <?php endif; ?>
+        </div>
+        <div class="mobile-item-actions">
+            <?php if ($r['status'] === 'pending'): ?>
+                <a href="approve.php?id=<?php echo $r['review_id']; ?>">Approve</a>
+            <?php endif; ?>
+            <a href="delete.php?id=<?php echo $r['review_id']; ?>" onclick="return confirm('Delete this review?');" class="danger-link">Delete</a>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
 </div>
 
 <?php require '../includes/admin-footer.php'; ?>

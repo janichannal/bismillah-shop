@@ -54,7 +54,7 @@ require 'includes/header.php';
 
 <section class="section">
     <div class="container">
-        <div class="grid" style="grid-template-columns: 1fr 1.3fr; align-items: stretch;">
+               <div class="split-contact">
 
             <div style="background: var(--secondary); border-radius: var(--radius); padding: 34px 28px; color: #cbd5e1;">
                 <h3 style="color:#fff; margin-bottom:20px;">Get In Touch</h3>
