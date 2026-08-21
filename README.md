@@ -90,7 +90,6 @@ A complete web platform giving the shop:
 - Email: `admin@bismillahshop.com`
 - Password: `admin@123`
 
-*(Change this password via the Profile page before any real deployment.)*
 
 ## Folder Structure
 bismillah-shop/

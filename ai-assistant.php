@@ -60,8 +60,8 @@ foreach ($services as $s) {
 
 $shopInfo = "SHOP INFO:\n"
           . "Name: Bismillah Mobile & Laptop Shop\n"
-          . "Address: Main Bazaar Road, Khuzdar, Balochistan\n"
-          . "Phone: 0300-1234567\n"
+          . "Address: Main Bazaar Azadii chowk mashke Road, Khuzdar, Balochistan\n"
+          . "Phone: 03379788440\n"
           . "Email: info@bismillahshop.com\n"
           . "Hours: Saturday-Thursday 10:00 AM - 9:00 PM, Friday 3:00 PM - 9:00 PM\n";
 
