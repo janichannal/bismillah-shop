@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2026 at 06:43 AM
+-- Generation Time: Aug 21, 2026 at 11:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `name`, `email`, `password`, `created_at`, `failed_attempts`, `locked_until`) VALUES
-(1, 'jawad Shop Admin', 'admin@bismillahshop.com', '$2y$10$4bo6Idedm9waT5orRgHq8OSIvupWWfzcMwjwMk04EiZ66BTcz7k..', '2026-08-09 06:31:52', 0, NULL);
+(1, 'jawad Shop Admin', 'alifdeen225@gmail.com', '$2y$10$EiSuTdvde63N55SeZbeR/eLj34Osa935VxnecdmageYLfMKsRiU4i', '2026-08-09 06:31:52', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,21 +131,61 @@ CREATE TABLE `messages` (
   `subject` varchar(150) DEFAULT NULL,
   `message` text NOT NULL,
   `status` enum('unread','read') NOT NULL DEFAULT 'unread',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `reference_token` varchar(12) DEFAULT NULL,
+  `customer_status` enum('pending','in_progress','resolved') NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`message_id`, `name`, `email`, `phone`, `subject`, `message`, `status`, `created_at`) VALUES
-(1, 'Ali Raza', 'ali.raza@example.com', '03001234567', 'Laptop repair inquiry', 'My laptop is not turning on, can you check it?', 'read', '2026-08-09 06:31:52'),
-(2, 'Sana Khan', 'sana.khan@example.com', '03111234567', 'Product availability', 'Is the Galaxy A54 currently in stock?', 'read', '2026-08-09 06:31:52'),
-(4, 'Jawad channal', 'jawad@gmail.com', '0331234567', 'infinx note 8i battery required', 'is this moblie phone battery availalbe in you shop', 'read', '2026-08-09 08:58:19'),
-(8, 'munna', 'munna@gmil.com', '03423434534', 'i want to buy this phone', 'could you give me any discount on this', 'read', '2026-08-10 07:43:13'),
-(9, 'Jawad channal', 'jawad11@gmail.com', '03178467537', 'Product Enquiry: Wired Stereo Headphones', 'Hi, I am interested in the Wired Stereo Headphones (Rs. 2,000). Please provide more information.', 'read', '2026-08-13 11:15:03'),
-(10, 'Jawad baloch', 'jawad@gmail.com', '0376677657657', 'Product Enquiry: HP Spectre x360 16 2-in-1', 'Hi, I am interested in the HP Spectre x360 16 2-in-1 (Rs. 385,000). Please provide more information.', 'read', '2026-08-14 09:27:56'),
-(11, 'ab raheem', 'raheemm@gmail.com', '023456723456', 'Product Enquiry: Amazfit Bip 5', 'Hi, I am interested in the Amazfit Bip 5 (Rs. 25,000). Please provide more information.', 'read', '2026-08-15 15:51:10');
+INSERT INTO `messages` (`message_id`, `name`, `email`, `phone`, `subject`, `message`, `status`, `created_at`, `reference_token`, `customer_status`) VALUES
+(4, 'Jawad channal', 'jawad@gmail.com', '0331234567', 'infinx note 8i battery required', 'is this moblie phone battery availalbe in you shop', 'read', '2026-08-09 08:58:19', NULL, 'pending'),
+(8, 'munna', 'munna@gmil.com', '03423434534', 'i want to buy this phone', 'could you give me any discount on this', 'read', '2026-08-10 07:43:13', NULL, 'pending'),
+(9, 'Jawad channal', 'jawad11@gmail.com', '03178467537', 'Product Enquiry: Wired Stereo Headphones', 'Hi, I am interested in the Wired Stereo Headphones (Rs. 2,000). Please provide more information.', 'read', '2026-08-13 11:15:03', NULL, 'pending'),
+(10, 'Jawad baloch', 'jawad@gmail.com', '0376677657657', 'Product Enquiry: HP Spectre x360 16 2-in-1', 'Hi, I am interested in the HP Spectre x360 16 2-in-1 (Rs. 385,000). Please provide more information.', 'read', '2026-08-14 09:27:56', NULL, 'pending'),
+(11, 'ab raheem', 'raheemm@gmail.com', '023456723456', 'Product Enquiry: Amazfit Bip 5', 'Hi, I am interested in the Amazfit Bip 5 (Rs. 25,000). Please provide more information.', 'read', '2026-08-15 15:51:10', NULL, 'pending'),
+(13, 'Jawad channal', 'jawadchannal@gmail.com', '031776676756', 'Product Enquiry: Wired Stereo Headphones', 'give me more information', 'read', '2026-08-20 05:45:09', NULL, 'pending'),
+(14, 'jani channal', 'jawadchannal@gmail.com', '03177877796', 'i want to buy this phone', 'hfjkashfjkaskj', 'read', '2026-08-20 05:50:12', NULL, 'pending'),
+(15, 'Jawad channal', 'jawadchannal@gmail.com', '03178467537', 'infinx note 8i battery required', 'jfugfyun', 'read', '2026-08-20 05:57:28', 'F73BE0', 'in_progress'),
+(16, 'Jawad channal', 'jawadchannal22@gmail.com', '03178467537', 'is there any discounts on any product', 'utfutfhgvb', 'unread', '2026-08-21 05:42:19', '3E01A3', 'pending'),
+(17, 'Jawad channal', 'jawadchannal@gmail.com', '03178467537', 'Service Booking: Charging Port Repair', 'Hi, I would like to book the Charging Port Repair service (Starting Rs. 500). Please let me know the next steps.', 'read', '2026-08-21 06:22:35', '890DED', 'in_progress'),
+(18, 'Jawad channal', 'jawadchannal@gmail.com', '03178467537', 'Service Booking: Laptop Repair', 'Hi, I would like to book the Laptop Repair service (Starting Rs. 1,500). Please let me know the next steps.', 'unread', '2026-08-21 07:53:29', '781769', 'pending'),
+(19, 'Jawad channal', 'jawadchannal@gmail.com', '03178467537', 'Service Booking: Laptop Repair', 'Hi, I would like to book the Laptop Repair service (Starting Rs. 1,500). Please let me know the next steps.', 'unread', '2026-08-21 07:54:28', '62A97C', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `reference_token` varchar(12) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name_snapshot` varchar(150) NOT NULL,
+  `unit_price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `total_amount` decimal(10,2) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_email` varchar(150) NOT NULL,
+  `customer_phone` varchar(30) NOT NULL,
+  `delivery_address` text DEFAULT NULL,
+  `payment_method` enum('bank_transfer','jazzcash_easypaisa') NOT NULL,
+  `payment_proof_image` varchar(255) DEFAULT NULL,
+  `order_status` enum('pending_payment','payment_review','confirmed','processing','completed','cancelled') NOT NULL DEFAULT 'pending_payment',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `reference_token`, `product_id`, `product_name_snapshot`, `unit_price`, `quantity`, `total_amount`, `customer_name`, `customer_email`, `customer_phone`, `delivery_address`, `payment_method`, `payment_proof_image`, `order_status`, `created_at`, `updated_at`) VALUES
+(1, '0C264C', 22, 'Amazfit Bip 5', 23000.00, 1, 23000.00, 'Jawad channal', 'jawadchannal22@gmail.com', '03178467537', 'kattan khuzdar', 'jazzcash_easypaisa', 'img_6a87ee00b76106.02383488.jpg', 'processing', '2026-08-21 06:19:44', '2026-08-21 06:28:43'),
+(2, 'B6F030', 21, 'Samsung Galaxy Watch Ultra', 165000.00, 1, 165000.00, 'Jawad channal', 'jawadchannal22@gmail.com', '03178467537', 'kattan khuzdar', 'jazzcash_easypaisa', NULL, 'pending_payment', '2026-08-21 07:48:17', '2026-08-21 07:48:17');
 
 -- --------------------------------------------------------
 
@@ -281,7 +321,6 @@ INSERT INTO `product_images` (`image_id`, `product_id`, `image`, `sort_order`, `
 (48, 18, 'img_6a81c18047a452.28040201.jpg', 1, '2026-08-16 13:56:16'),
 (49, 18, 'img_6a81c18048c8a7.22032448.jpg', 2, '2026-08-16 13:56:16'),
 (50, 17, 'img_6a81c1f44e3fa6.71070394.jpg', 0, '2026-08-16 13:58:12'),
-(51, 17, 'img_6a81c1f44efd59.33083760.jpg', 1, '2026-08-16 13:58:12'),
 (52, 17, 'img_6a81c1f44f8cb8.42009473.jpg', 2, '2026-08-16 13:58:12'),
 (53, 16, 'img_6a81c24c740551.18280347.jpg', 0, '2026-08-16 13:59:40'),
 (54, 16, 'img_6a81c24c74e283.76785697.jpg', 1, '2026-08-16 13:59:40'),
@@ -325,7 +364,11 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`review_id`, `product_id`, `customer_name`, `rating`, `review_text`, `status`, `created_at`) VALUES
 (1, 11, 'jani', 5, 'best services', 'approved', '2026-08-13 11:37:08'),
 (2, 10, 'jawad', 4, '', 'approved', '2026-08-14 04:26:47'),
-(3, 22, 'Jawad channal', 5, 'zxctvybunimooiukyr', 'approved', '2026-08-15 15:53:53');
+(3, 22, 'Jawad channal', 5, 'zxctvybunimooiukyr', 'approved', '2026-08-15 15:53:53'),
+(4, 9, 'khalil ahmed', 5, 'genuine product and fair prices', 'approved', '2026-08-20 06:29:19'),
+(5, 18, 'saqib jan channal', 5, 'very high quality products', 'approved', '2026-08-20 06:34:07'),
+(6, 13, 'zubair ahmed', 4, 'good product', 'pending', '2026-08-20 06:40:35'),
+(7, 24, 'Jawad', 5, 'best product', 'pending', '2026-08-21 05:43:40');
 
 -- --------------------------------------------------------
 
@@ -353,7 +396,7 @@ INSERT INTO `services` (`service_id`, `service_name`, `description`, `price`, `i
 (3, 'Windows Installation', 'Fresh Windows installation with essential software setup.', 900.00, 'img_6a7d4f6128df13.27347833.jpg', '2026-08-09 06:31:52', '2026-08-13 05:00:17'),
 (4, 'Data Recovery', 'Recovery of lost or deleted data from damaged drives.', 2500.00, 'img_6a7c7875327a60.58440349.jpg', '2026-08-09 06:31:52', '2026-08-12 13:43:17'),
 (5, 'Mobile Repair', 'General mobile phone repair and maintenance.', 1000.00, 'img_6a7c78a799c744.61689287.jpg', '2026-08-09 06:31:52', '2026-08-12 13:44:07'),
-(7, 'Battery Replacement', 'Genuine battery replacement for all phone and laptop models. Restore full charge capacity.', 700.00, 'img_6a7eb76be705c9.42473498.jpg', '2026-08-14 06:36:27', '2026-08-14 06:36:27'),
+(7, 'Battery Replacement', 'Genuine battery replacement for all phone and laptop models. Restore full charge capacity.', 3000.00, 'img_6a7eb76be705c9.42473498.jpg', '2026-08-14 06:36:27', '2026-08-18 04:56:08'),
 (8, 'Charging Port Repair', 'Fix broken, loose, or faulty charging ports for all devices. Restore reliable power connection.', 500.00, 'img_6a7eb862b141e9.70095659.jpg', '2026-08-14 06:40:34', '2026-08-14 06:40:34'),
 (9, 'Screen Protector Installation', 'Precision-cut tempered glass or film protector applied bubble‑free for maximum protection.', 300.00, 'img_6a7eb9c4f22865.52147482.jpg', '2026-08-14 06:46:28', '2026-08-14 06:46:28');
 
@@ -392,7 +435,9 @@ INSERT INTO `service_images` (`image_id`, `service_id`, `image`, `sort_order`, `
 (14, 4, 'img_6a7ebab705efe3.79864375.jpg', 1, '2026-08-14 06:50:31'),
 (15, 2, 'img_6a7ebbe58d88f1.20127370.jpg', 0, '2026-08-14 06:55:33'),
 (16, 2, 'img_6a7ebbe58e5032.99841157.jpg', 1, '2026-08-14 06:55:33'),
-(17, 2, 'img_6a7ebbe58f0c84.98049390.jpg', 2, '2026-08-14 06:55:33');
+(17, 2, 'img_6a7ebbe58f0c84.98049390.jpg', 2, '2026-08-14 06:55:33'),
+(18, 5, 'img_6a83e6373a67d7.33286423.jpg', 0, '2026-08-18 04:57:27'),
+(19, 5, 'img_6a83e63742c381.81899269.jpg', 1, '2026-08-18 04:57:27');
 
 -- --------------------------------------------------------
 
@@ -449,6 +494,14 @@ ALTER TABLE `gallery_images`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`message_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD UNIQUE KEY `reference_token` (`reference_token`),
+  ADD KEY `fk_orders_product` (`product_id`);
 
 --
 -- Indexes for table `password_resets`
@@ -529,7 +582,13 @@ ALTER TABLE `gallery_images`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -553,7 +612,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -565,7 +624,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `service_images`
 --
 ALTER TABLE `service_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -582,6 +641,12 @@ ALTER TABLE `settings`
 --
 ALTER TABLE `gallery_images`
   ADD CONSTRAINT `fk_gallery_images_gallery` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`gallery_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_orders_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `password_resets`
