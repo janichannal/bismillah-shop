@@ -63,13 +63,15 @@ require 'includes/admin-header.php';
         </div>
     </div>
 
-    <div style="margin-bottom: 30px;">
+       <div style="margin-bottom: 30px;">
         <h3 style="margin-bottom: 14px;">Quick Actions</h3>
-        <a href="products/add.php" class="btn btn-primary">Add Product</a>
-        <a href="services/add.php" class="btn btn-primary">Add Service</a>
-        <a href="gallery/add.php" class="btn btn-primary">Upload Gallery Image</a>
-        <a href="messages/index.php" class="btn btn-outline">View Messages</a>
-        <a href="reviews/index.php" class="btn btn-outline">View Reviews</a>
+        <div class="quick-actions-row">
+            <a href="products/add.php" class="btn btn-primary">Add Product</a>
+            <a href="services/add.php" class="btn btn-primary">Add Service</a>
+            <a href="gallery/add.php" class="btn btn-primary">Upload Gallery Image</a>
+            <a href="messages/index.php" class="btn btn-outline">View Messages</a>
+            <a href="reviews/index.php" class="btn btn-outline">View Reviews</a>
+        </div>
     </div>
 
     <?php if (count($lowStockProducts) > 0): ?>

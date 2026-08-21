@@ -15,11 +15,13 @@
             <div>
                 <h4>Contact Info</h4>
                 <p>Khuzdar, Balochistan</p>
-                <p>Phone: 0300-1234567</p>
+                <p>Phone: 03379788440</p>
                 <p>Email: info@bismillahshop.com</p>
             </div>
         </div>
         <div class="footer-bottom">
+            <h4>Developer</h4>
+            <p>Khalid Jawad Channal Developed This With❤️</p>
             &copy; <?php echo date('Y'); ?> Bismillah Mobile & Laptop Shop. All rights reserved.
         </div>
     </div>

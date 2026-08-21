@@ -231,4 +231,64 @@ function compressExistingImage($filePath, $maxWidth = 1400, $quality = 82) {
 
     return [$originalSize, $newSize];
 }
+/**
+ * Generates a random, hard-to-guess 6-character reference code for enquiry
+ * tracking, and guarantees it's unique in the database.
+ */
+function generateUniqueReferenceToken($pdo) {
+    do {
+        $token = strtoupper(substr(bin2hex(random_bytes(4)), 0, 6));
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM messages WHERE reference_token = ?");
+        $stmt->execute([$token]);
+    } while ($stmt->fetchColumn() > 0);
+    return $token;
+}
+/**
+ * Runs a PHP script in the background (doesn't make the current page wait for it).
+ * Used so email sending doesn't slow down the page for the visitor.
+ * Returns true if it started successfully, false if this environment doesn't support it
+ * (in which case the caller should send the email normally as a fallback).
+ */
+function runInBackground($scriptAbsolutePath, $args = []) {
+    if (!function_exists('popen') || !function_exists('pclose')) {
+        return false;
+    }
+    if (!defined('PHP_CLI_PATH') || !file_exists(PHP_CLI_PATH)) {
+        return false;
+    }
+
+    $escapedArgs = array_map('escapeshellarg', $args);
+    $cmd = '"' . PHP_CLI_PATH . '" "' . $scriptAbsolutePath . '" ' . implode(' ', $escapedArgs);
+
+    $handle = @popen('cmd /c start /B "" ' . $cmd, 'r');
+    if ($handle === false) {
+        return false;
+    }
+    pclose($handle);
+    return true;
+}
+function generateUniqueOrderReference($pdo) {
+    do {
+        $token = strtoupper(substr(bin2hex(random_bytes(4)), 0, 6));
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM orders WHERE reference_token = ?");
+        $stmt->execute([$token]);
+    } while ($stmt->fetchColumn() > 0);
+    return $token;
+}
+
+function orderStatusInfo($status) {
+    $map = [
+        'pending_payment' => ['label' => 'Awaiting Payment', 'bg' => '#fef3c7', 'text' => '#a16207'],
+        'payment_review'  => ['label' => 'Payment Under Review', 'bg' => '#dbeafe', 'text' => '#1e40af'],
+        'confirmed'       => ['label' => 'Payment Confirmed', 'bg' => '#d1fae5', 'text' => '#047857'],
+        'processing'      => ['label' => 'Processing', 'bg' => '#ede9fe', 'text' => '#6d28d9'],
+        'completed'       => ['label' => 'Completed', 'bg' => '#dcfce7', 'text' => '#15803d'],
+        'cancelled'       => ['label' => 'Cancelled', 'bg' => '#fee2e2', 'text' => '#b91c1c'],
+    ];
+    return $map[$status] ?? $map['pending_payment'];
+}
+
+function paymentMethodLabel($method) {
+    return $method === 'bank_transfer' ? 'Bank Transfer' : 'JazzCash / EasyPaisa';
+}
 ?>

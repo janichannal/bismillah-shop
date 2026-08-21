@@ -254,3 +254,8 @@
 }
 .mobile-item-actions a { color: var(--primary); }
 .mobile-item-actions a.danger-link { color: var(--danger); }
+.quick-actions-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}

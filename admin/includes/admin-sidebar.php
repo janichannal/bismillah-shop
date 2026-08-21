@@ -17,6 +17,7 @@
         <a href="/bismillah-shop/admin/services/index.php" class="admin-nav-link">Services</a>
         <a href="/bismillah-shop/admin/gallery/index.php" class="admin-nav-link">Gallery</a>
         <a href="/bismillah-shop/admin/messages/index.php" class="admin-nav-link">Messages</a>
+        <a href="/bismillah-shop/admin/orders/index.php" class="admin-nav-link">Orders</a>
         <a href="/bismillah-shop/admin/reviews/index.php" class="admin-nav-link">Reviews</a>
         <a href="/bismillah-shop/admin/optimize-images.php" class="admin-nav-link">Optimize Images</a>
         <a href="/bismillah-shop/admin/settings.php" class="admin-nav-link">Settings</a>

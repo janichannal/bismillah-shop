@@ -1,7 +1,9 @@
 <?php
 $pageTitle = 'Product Details';
 require 'config/database.php';
+require 'config/constants.php';
 require 'includes/functions.php';
+require 'includes/mailer.php';
 
 $productId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
@@ -62,11 +64,21 @@ if ($product && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_re
     $rating = (int) ($_POST['rating'] ?? 0);
     $reviewText = trim($_POST['review_text'] ?? '');
 
-    if ($customerName === '' || $rating < 1 || $rating > 5) {
+           if ($customerName === '' || $rating < 1 || $rating > 5) {
         $reviewError = 'Please enter your name and select a rating.';
     } else {
         $stmt = $pdo->prepare("INSERT INTO reviews (product_id, customer_name, rating, review_text) VALUES (?, ?, ?, ?)");
         $stmt->execute([$productId, $customerName, $rating, $reviewText]);
+        $newReviewId = $pdo->lastInsertId();
+
+        $sentInBackground = runInBackground(
+            __DIR__ . '/includes/send-notification-cli.php',
+            ['review', (string) $newReviewId, $_SERVER['HTTP_HOST']]
+        );
+        if (!$sentInBackground) {
+            notifyAdminsOfNewReview($pdo, $newReviewId, $_SERVER['HTTP_HOST']);
+        }
+
         header('Location: product-details.php?id=' . $productId . '&review_submitted=1');
         exit;
     }
@@ -154,6 +166,9 @@ require 'includes/header.php';
                 </p>
 
                 <div class="cta-button-group">
+                                <?php if ($product['stock_quantity'] > 0): ?>
+                <a href="checkout.php?id=<?php echo $product['product_id']; ?>" class="btn btn-primary" style="background:var(--accent-dark);">Buy Now</a>
+                <?php endif; ?>
                 <a href="contact.php?subject=<?php echo urlencode('Product Enquiry: ' . $product['product_name']); ?>&message=<?php echo urlencode('Hi, I am interested in the ' . $product['product_name'] . ' (Rs. ' . number_format($product['price']) . '). Please provide more information.'); ?>" class="btn btn-primary">Enquire About This Product</a>
                 <a href="https://wa.me/<?php echo WHATSAPP_NUMBER; ?>?text=<?php echo urlencode('Hi, I am interested in the ' . $product['product_name'] . ' (Rs. ' . number_format($product['price']) . '). Please provide more information.'); ?>" target="_blank" rel="noopener" class="btn" style="background:#25D366; color:#fff;">Chat on WhatsApp</a>
                 <a href="products.php" class="btn btn-outline">Back to Products</a>

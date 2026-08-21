@@ -79,8 +79,10 @@ require 'includes/header.php';
         <span class="hero-eyebrow">Welcome to Bismillah Mobile & Laptop Shop</span>
         <h1>Your Trusted Technology Partner</h1>
         <p>Quality mobile phones, laptops, and expert repair services — right here in Khuzdar.</p>
-        <a href="products.php" class="btn btn-primary">Explore Products</a>
-        <a href="contact.php" class="btn btn-outline">Contact Us</a>
+               <div class="hero-button-group">
+            <a href="products.php" class="btn btn-primary">Explore Products</a>
+            <a href="contact.php" class="btn btn-outline">Contact Us</a>
+        </div>
 
         <div class="hero-trust-strip">
             <div class="hero-trust-item"><span class="check">&#10003;</span> Genuine products</div>
